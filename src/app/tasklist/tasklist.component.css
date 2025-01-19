@@ -1,0 +1,56 @@
+.slds-container_medium{
+    width: 50%;
+    margin:auto;
+    margin-top: 5rem;
+    min-height: 300px;
+
+}
+
+
+
+/* styles.css or component-specific CSS */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust opacity as needed */
+    z-index: 999; /* Ensure it’s behind the modal but above other content */
+  }
+  
+
+  .custom-icon{
+    font-size: 30px;
+    background-color: green;
+    color: white;
+    padding: 10px;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+}
+
+
+.scrollable-table-container {
+  overflow-x: auto; /* Enable horizontal scrolling */
+  width: 100%; /* Ensure the container takes full width */
+  border: 1px solid #e0e0e0; /* Optional: Border for visibility */
+  border-radius: 4px; /* Optional: Rounded corners */
+}
+
+.slds-table {
+  width: 100%; /* Ensure the table takes full width */
+  min-width: 600px; /* Adjust as needed to prevent overflow */
+}
+
+@media (max-width: 768px) {
+  .slds-table thead {
+    display: table-header-group; /* Keep header visible on mobile */
+  }
+  .slds-container_medium{
+    width: 100%;
+    min-height: 100%;
+  }
+}

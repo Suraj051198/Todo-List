@@ -1,0 +1,114 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "taskapp": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "standalone": false
+        },
+        "@schematics/angular:directive": {
+          "standalone": false
+        },
+        "@schematics/angular:pipe": {
+          "standalone": false
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:application",
+          "options": {
+            "outputPath": "dist/taskapp",
+            "index": "src/index.html",
+            "browser": "src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "tsconfig.app.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
+            ],
+            "styles": [
+              "src/styles.css",
+              "node_modules/@fortawesome/fontawesome-free/css/fontawesome.css",
+              "https://cdnjs.cloudflare.com/ajax/libs/SLDS/2.15.0/styles/salesforce-lightning-design-system.min.css",
+              "node_modules/@salesforce-ux/design-system/assets/styles/salesforce-lightning-design-system-offline.min.css"
+            ],
+            "scripts": [],
+            "server": "src/main.server.ts",
+            "prerender": true,
+            "ssr": {
+              "entry": "server.ts"
+            }
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",  // Adjust this value
+                  "maximumError": "2.5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kB",
+                  "maximumError": "4kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "taskapp:build:production"
+            },
+            "development": {
+              "buildTarget": "taskapp:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "tsconfig.spec.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
+            ],
+            "styles": [
+              "src/styles.css"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    }
+  }
+}

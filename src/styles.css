@@ -1,0 +1,12 @@
+body {
+    background-color: #333; /* Dark color for the whole screen */
+    color: white; /* Optional: change text color to white for contrast */
+}
+
+/* Style for your container to keep it light */
+.slds-container_medium {
+    background-color: white; /* Light background for the container */
+    color: black; /* Dark text color for readability */
+    border-radius: 8px; /* Optional: add some rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Optional: add a shadow effect */
+}

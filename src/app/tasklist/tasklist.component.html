@@ -1,0 +1,133 @@
+<div class="slds-m-around_medium slds-container_medium container slds-theme_default">
+  <div class="slds-grid slds-grid_align-spread slds-m-bottom_medium slds-m-top_medium slds-background_color_strong slds-p-around_medium">
+    <div class="slds-grid slds-align-middle">
+      <i class="fa-solid fa-list-check slds-icon slds-icon_large slds-m-right_medium custom-icon"></i>
+      <div>
+        <h1 class="slds-text-heading_medium tasks">Tasks</h1>
+        <p>All Task</p>
+      </div>
+    </div>
+    <button class="slds-button slds-button_brand" (click)="openModal()">New Task</button>
+  </div>
+
+  <div class="slds-m-bottom_medium overflow-x:auto;">
+  <div class="scrollable-table-container">
+    <div class="scrollable-table-container">
+    <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+      <thead>
+        <tr class="slds-text-title_caps">
+          <th scope="col">
+            <div class="slds-truncate"><input type="checkbox"></div>
+          </th>
+          <th scope="col">
+            <div class="slds-truncate">Assigned To</div>
+          </th>
+          <th scope="col">
+            <div class="slds-truncate">Status</div>
+          </th>
+          <th scope="col">
+            <div class="slds-truncate">Due Date</div>
+          </th>
+          <th scope="col">
+            <div class="slds-truncate">Priority</div>
+          </th>
+          <th scope="col">
+            <div class="slds-truncate">Description</div>
+          </th>
+          <th scope="col">
+            <div class="slds-truncate">Actions</div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let task of tasks">
+          <td><input type="checkbox" [(ngModel)]="task.completed"></td>
+          <td>{{ task.assignedTo }}</td>
+          <td>{{ task.status }}</td>
+          <td>{{ task.dueDate | date }}</td>
+          <td>{{ task.priority }}</td>
+          <td>{{ task.description }}</td>
+          <td>
+            <button class="slds-button slds-button_neutral" (click)="openModal(task)">Edit</button>
+            <button class="slds-button slds-button_destructive" (click)="confirmDelete(task.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+</div>
+
+  <!-- Modal for task creation/editing -->
+  <div *ngIf="isModalOpen" class="slds-modal slds-fade-in-open overlay">
+    <div class="slds-modal__container">
+      <div class="slds-modal__header">
+        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" (click)="closeModal()">
+          <i class="fa-solid fa-xmark" style="font-size:20px;"></i>
+          <span class="slds-assistive-text">Close</span>
+        </button>
+        <h2 class="slds-text-heading_medium">{{ editingTask ? 'Edit Task' : 'New Task' }}</h2>
+      </div>
+      <div class="slds-modal__content slds-p-around_medium">
+        <div class="slds-grid">
+          <div class="slds-col slds-size_1-of-2 slds-p-horizontal_medium">
+            <label class="slds-form-element__label">Assigned To</label>
+            <input class="slds-input" [(ngModel)]="newTask.assignedTo" placeholder="Assigned To">
+          </div>
+          <div class="slds-col slds-size_1-of-2 slds-p-horizontal_medium">
+            <label class="slds-form-element__label">Status</label>
+            <select class="slds-select" [(ngModel)]="newTask.status">
+              <option value="Pending">Pending</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Completed">Completed</option>
+            </select>
+          </div>
+        </div>
+        <div class="slds-grid">
+          <div class="slds-col slds-size_1-of-2 slds-p-horizontal_medium">
+            <label class="slds-form-element__label">Due Date</label>
+            <input type="date" class="slds-input" [(ngModel)]="newTask.dueDate">
+          </div>
+          <div class="slds-col slds-size_1-of-2 slds-p-horizontal_medium">
+            <label class="slds-form-element__label">Priority</label>
+            <select class="slds-select" [(ngModel)]="newTask.priority">
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+            </select>
+          </div>
+        </div>
+        <div class="slds-grid">
+          <div class="slds-col slds-p-horizontal_medium">
+            <label class="slds-form-element__label">Description</label>
+            <input class="slds-input" [(ngModel)]="newTask.description" placeholder="Description">
+          </div>
+        </div>
+      </div>
+      <div class="slds-modal__footer">
+        <button class="slds-button slds-button_neutral" (click)="closeModal()">Cancel</button>
+        <button class="slds-button slds-button_brand" (click)="saveTask()">{{ editingTask ? 'Update Task' : 'Add Task' }}</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirmation modal -->
+  <div *ngIf="isConfirmModalOpen" class="slds-modal slds-fade-in-open overlay">
+    <div class="slds-modal__container">
+      <div class="slds-modal__header">
+        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" (click)="closeConfirmModal()">
+          <i class="fa-solid fa-xmark" style="font-size:20px;"></i>
+          <span class="slds-assistive-text">Close</span>
+        </button>
+        <h2 class="slds-text-heading_medium">Confirm Deletion</h2>
+      </div>
+      <div class="slds-modal__content slds-p-around_medium">
+        <p>Do you really want to delete this task?</p>
+      </div>
+      <div class="slds-modal__footer">
+        <button class="slds-button slds-button_neutral" (click)="closeConfirmModal()">Cancel</button>
+        <button class="slds-button slds-button_destructive" (click)="deleteTask(confirmedTaskId!)">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
