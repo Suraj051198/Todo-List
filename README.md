@@ -1,27 +1,40 @@
-# Taskapp
+RUD Operations Project
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.8.
+A project showcasing Create, Read, Update, and Delete (CRUD) functionality in a structured and user-friendly application. This project demonstrates efficient task management and streamlined operations using modern tools and frameworks.
 
-## Development server
+Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Create: Add new tasks with relevant details.
 
-## Code scaffolding
+Read: View all tasks in a comprehensive list.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Update: Edit tasks to make changes or corrections.
 
-## Build
+Delete: Remove tasks that are no longer required.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Installation
 
-## Running unit tests
+Clone the repository:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+git clone <your-repository-url>
+cd CRUD-Operations-Project
 
-## Running end-to-end tests
+Install dependencies:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+npm install
 
-## Further help
+Start the server:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+npm start
+
+Screenshots
+
+Here are some images of the project showcasing CRUD operations:
+
+Create Task
+
+Read Tasks
+
+Update Task
+
+Delete Task
